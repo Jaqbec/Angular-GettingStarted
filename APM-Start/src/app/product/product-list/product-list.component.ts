@@ -9,6 +9,12 @@ export class ProductListComponent implements OnInit {
   pageTitle = 'Product List';
   filterBy = 'Filter by:';
   filteredBy = 'Filtered by:';
+  showImageBtn = 'Show image';
+  productHeader = 'Product';
+  codeHeader = 'Code';
+  availabilityHeader = 'Available';
+  priceHeader = 'Price';
+  ratingHeader = 'Rating';
 
   constructor() {
   }
