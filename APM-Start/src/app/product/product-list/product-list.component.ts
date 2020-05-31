@@ -10,11 +10,19 @@ export class ProductListComponent implements OnInit {
   filterBy = 'Filter by:';
   filteredBy = 'Filtered by:';
   showImageBtn = 'Show image';
+  hideImageBtn = 'Hide image';
   productHeader = 'Product';
   codeHeader = 'Code';
   availabilityHeader = 'Available';
   priceHeader = 'Price';
   ratingHeader = 'Rating';
+  listFilter = 'cart';
+
+  imageWidth = 50;
+  imageMargin = 2;
+
+  imagesOn = false;
+
   products: any[] = [
     {
       productId: 1,
@@ -44,4 +52,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleImage(): void {
+    this.imagesOn = !this.imagesOn;
+  }
 }
