@@ -17,13 +17,11 @@ export class ProductListComponent implements OnInit {
   availabilityHeader = 'Available';
   priceHeader = 'Price';
   ratingHeader = 'Rating';
-  listFilter = 'cart';
-
   imageWidth = 50;
   imageMargin = 2;
-
   imagesOn = false;
-
+  private _listFilter: string;
+  filteredProducts: Product[];
   products: Product[] = [
     {
       productId: 1,
@@ -48,6 +46,8 @@ export class ProductListComponent implements OnInit {
   ];
 
   constructor() {
+    this.filteredProducts = this.products;
+    this.listFilter = '';
   }
 
   ngOnInit() {
@@ -55,5 +55,21 @@ export class ProductListComponent implements OnInit {
 
   toggleImage(): void {
     this.imagesOn = !this.imagesOn;
+  }
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+
+  private performFilter(filterBy: string): Product[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products
+      .filter((product: Product) =>
+        product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 }
