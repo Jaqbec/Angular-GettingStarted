@@ -1,32 +1,33 @@
-<div class="card">
-  <div class="card-header">
+<div class='card'>
+  <div class='card-header'>
     {{pageTitle}}
   </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-2 text-left">{{filterBy}}</div>
-      <div class="col-md-4 text-left">
-        <input type="text" [(ngModel)]="listFilter"/>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2 text-left'>{{filterBy}}</div>
+      <div class='col-md-4 text-left'>
+        <input type='text' [(ngModel)]='listFilter'/>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2 text-left">
+    <div class='row'>
+      <div class='col-md-2 text-left'>
         <h4>
           {{filteredBy}}
         </h4>
       </div>
-      <div class="col-md-4 text-left">
+      <div class='col-md-4 text-left'>
         <h4>
           {{listFilter}}
         </h4>
       </div>
     </div>
-    <table class="table-responsive">
-      <table class="table" *ngIf="products&&products.length">
+    <table class='table-responsive'>
+      <table class='table' *ngIf='products&&products.length'>
         <thead>
         <tr>
           <th>
-            <button class="btn btn-primary" (click)="toggleImage()">
+            <button class='btn btn-primary' (click)=
+              'toggleImage()'>
               {{imagesOn ? hideImageBtn : showImageBtn}}
             </button>
           </th>
@@ -38,19 +39,22 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of filteredProducts">
+        <tr *ngFor='let product of filteredProducts'>
           <td>
-            <img [src]="product.imageUrl"
-                 [title]="product.productName"
-                 [style.width.px]="imageWidth"
-                 [style.margin.px]="imageMargin"
-                 *ngIf="imagesOn">
+            <img [src]='product.imageUrl'
+                 [title]='product.productName'
+                 [style.width.px]='imageWidth'
+                 [style.margin.px]='imageMargin'
+                 *ngIf='imagesOn'>
           </td>
           <td>{{product.productName}}</td>
           <td>{{product.productCode | convertToSpace:'-'}}</td>
           <td>{{product.releaseDate}}</td>
           <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
-          <td>{{product.starRating}}</td>
+          <td style='align-items: center'>
+            <pm-star [rating]='product.starRating'
+                     (ratingClicked)='onRatingClicked($event)'></pm-star>
+          </td>
         </tr>
         </tbody>
       </table>
